@@ -1,0 +1,93 @@
+import kagglehub
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+
+path = kagglehub.dataset_download("shwetabh123/mall-customers")
+file_path = os.path.join(path, "Mall_Customers.csv")
+
+
+datos = pd.read_csv(file_path)
+
+
+X = datos[["Annual Income (k$)", "Spending Score (1-100)"]].values
+
+
+kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)
+y_kmeans = kmeans.fit_predict(X)
+
+#Gráfica 
+plt.figure(figsize=(6,5))
+plt.scatter(X[:,0], X[:,1], c=y_kmeans, cmap="rainbow", s=50)
+plt.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1],
+            c="black", marker="X", s=200, label="Centroides")
+plt.xlabel("Ingreso Anual (miles $)")
+plt.ylabel("Puntaje de Gasto ")
+plt.title("KMeans - Ingreso vs Gasto")
+plt.legend()
+plt.show()
+#--------------------------------------------------------------------
+import kagglehub
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+
+path = kagglehub.dataset_download("shwetabh123/mall-customers")
+file_path = os.path.join(path, "Mall_Customers.csv")
+
+
+datos = pd.read_csv(file_path)
+
+
+X = datos[["Age", "Spending Score (1-100)"]].values
+
+
+kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)
+y_kmeans = kmeans.fit_predict(X)
+
+#Gráfica 
+plt.figure(figsize=(6,5))
+plt.scatter(X[:,0], X[:,1], c=y_kmeans, cmap="rainbow", s=50)
+plt.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1],
+            c="black", marker="X", s=200, label="Centroides")
+plt.xlabel("Edad")
+plt.ylabel("Puntaje de Gasto ")
+plt.title("KMeans - Edad vs Gasto")
+plt.legend()
+plt.show()
+#-------------------------------------------------------------------------
+import kagglehub
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+
+path = kagglehub.dataset_download("shwetabh123/mall-customers")
+file_path = os.path.join(path, "Mall_Customers.csv")
+
+
+datos = pd.read_csv(file_path)
+
+
+X = datos[["Age", "Annual Income (k$)"]].values
+
+
+kmeans = KMeans(n_clusters=5, random_state=42, n_init=10)
+y_kmeans = kmeans.fit_predict(X)
+
+#Gráfica 
+plt.figure(figsize=(6,5))
+plt.scatter(X[:,0], X[:,1], c=y_kmeans, cmap="rainbow", s=50)
+plt.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1],
+            c="black", marker="X", s=200, label="Centroides")
+plt.xlabel("Edad")
+plt.ylabel("Ingreso Anual (miles $)")
+plt.title("KMeans - Edad vs Ingreso")
+plt.legend()
+plt.show()
+
