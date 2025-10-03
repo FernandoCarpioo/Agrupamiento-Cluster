@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.cluster import KMeans
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+plt.subplot(1, 2, 1)
+plt.scatter(X[:, 2], X[:, 3], c='gray', s=50)  # todos los puntos grises
+plt.xlabel("Petal Length")
+plt.ylabel("Petal Width")
+plt.title("Sin Agrupar")
+
+
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+kmeans.fit(X)
+
+plt.subplot(1, 2, 2)
+plt.scatter(X[:, 2], X[:, 3], c=kmeans.labels_, cmap='rainbow', s=50)
+plt.scatter(kmeans.cluster_centers_[:, 2], kmeans.cluster_centers_[:, 3], 
+            c='black', marker='+', s=200, label='Centroides')
+plt.xlabel("Petal Length")
+plt.ylabel("Petal Width")
+plt.title("Clusters KMeans)")
+plt.legend()
+
+plt.tight_layout()
+plt.show()
