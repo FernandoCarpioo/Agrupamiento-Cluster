@@ -1,0 +1,25 @@
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.cluster import SpectralClustering
+
+iris = load_iris()
+X = iris.data
+
+plt.subplot(1, 2, 1)
+plt.scatter(X[:, 2], X[:, 3], c='gray', s=50)  
+plt.xlabel("Petal Length")
+plt.ylabel("Petal Width")
+plt.title("Sin Agrupar")
+
+
+SC = SpectralClustering(n_clusters=3)
+SC.fit(X)
+
+plt.subplot(1, 2, 2)
+plt.scatter(X[:, 2], X[:, 3], c=SC.labels_, cmap='viridis', s=50)
+plt.xlabel("Petal Length")
+plt.ylabel("Petal Width")
+plt.title("Spectral Clustering")
+
+plt.tight_layout()
+plt.show()
