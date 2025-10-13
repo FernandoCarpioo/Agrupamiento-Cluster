@@ -6,15 +6,24 @@ digits = load_digits()
 X = digits.data     
 y = digits.target   
 
-print("Forma del dataset:", X.shape)
-
 pca = PCA(n_components=2)
 X_pca = pca.fit_transform(X)
 
-plt.figure(figsize=(8,6))
+plt.figure(figsize=(14,6))
+
+plt.subplot(1, 2, 1)
+plt.scatter(X[:,0], X[:,1], c=y, cmap='tab10', s=30)
+plt.xlabel("Característica 1")
+plt.ylabel("Característica 2")
+plt.title("Datos originales")
+plt.colorbar(label="Dígito")
+
+plt.subplot(1, 2, 2)
 scatter = plt.scatter(X_pca[:,0], X_pca[:,1], c=y, cmap='tab10', s=30)
 plt.xlabel("Componente Principal 1")
 plt.ylabel("Componente Principal 2")
 plt.title("PCA - Digits dataset (reducción a 2D)")
 plt.colorbar(scatter, label="Dígito")
+
+plt.tight_layout()
 plt.show()
