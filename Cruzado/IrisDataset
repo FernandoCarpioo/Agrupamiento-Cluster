@@ -1,0 +1,29 @@
+from sklearn.datasets import load_iris
+from sklearn.model_selection import KFold, cross_validate
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+modelo = LinearRegression()
+
+kfold = KFold(n_splits=5, shuffle=True, random_state=42)
+
+# Metricas
+resultados = cross_validate(
+    modelo, X, y, cv=kfold,
+    scoring=('r2', 'neg_mean_squared_error', 'neg_mean_absolute_error'),
+    return_train_score=True
+)
+
+# Resultados
+print("R² por fold:", resultados['test_r2'])
+print("R² promedio:", np.mean(resultados['test_r2']))
+
+mse_promedio = -np.mean(resultados['test_neg_mean_squared_error'])
+mae_promedio = -np.mean(resultados['test_neg_mean_absolute_error'])
+
+print("MSE promedio:", mse_promedio)
+print("MAE promedio:", mae_promedio)
